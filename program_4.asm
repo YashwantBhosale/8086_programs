@@ -1,5 +1,5 @@
-; write program in 8086 assembly language to configure Port A of 8255 as output port in mode 1. 
-; Verify operation of this mode by writing a program to send output byte to port A under the 
+; write program in 8086 assembly language to configure Port A of 8255 as input port in mode 1. 
+; Verify operation of this mode by writing a program to send input byte to port A under the 
 ; control of handshake signals.
 
 	MOV AL, B0H ; control word to configure port A as mode 1 i/p and write it to control registers
