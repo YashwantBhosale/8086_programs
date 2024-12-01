@@ -1,5 +1,5 @@
-; write a program in 8086 assembly language to demonstrate Decoded Scan key matrix mode of 8279
-
+; write a program in 8086 assembly language to demonstrate encoded Scan key matrix mode of 8279
+; only command word will change for N key roll over rest of the program will stay same
 	MOV AL, 01H ; encoded scan 2 key lockout
 	OUT 31H, AL
 
