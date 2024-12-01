@@ -23,7 +23,7 @@ BACK:
 	; assuming block length is in bytes as we are transferring two bytes at a time we need to 
 	; decrement counter by 2
 	DEC CX
-	DEX CX
+	DEC CX
 	JNZ BACK
 	HLT
 	
