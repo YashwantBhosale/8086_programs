@@ -1,5 +1,6 @@
 ; Write a Interrupt Service Subroutine (ISS) for INT3 to increment CX by two and display contents of 
 ; AX register on screen using INT 10 function call 0A of BIOS interrupt
+org 100h;
 
 MAIN:
 	CLI
@@ -18,12 +19,15 @@ MAIN:
 ISS:
 	ADD CX, 02H ; increment contents of CX by 2
 	MOV DX, AX ; move content to be displayed tempororily to DX
-	MOV BX, CX ; backup contents of CX	
+	MOV BX, CX ; backup contents of CX
+	MOV CX, 01H	
 	MOV AH, 0AH ; bios output function
 	MOV AL, 'A'
 	INT 10H ; display character
+	MOV CX, 01H
 	MOV AL, 'X'
-	INT 10H 
+	INT 10H
+	MOV CX, 01H 
 	MOV AL, '='
 	INT 10H
 	; main code to display the content
@@ -39,9 +43,13 @@ BACK:
 DISPLAY_CHAR:
 	ADD AL, '0' ; convert digit to ascii
 	MOV AH, 0AH ; bios output function
+	MOV SI, CX
+	MOV CX, 01H
 	INT 10H ; display character
+	MOV CX, SI
 	SUB CL, 04H ; adjust number of bits to be shifted
 	DEC CH
 	JNZ BACK
 	MOV CX, BX ; restore contents of CX
 	IRET
+
