@@ -43,7 +43,7 @@ DELAY:
 	MOV CX, 0AH
 OUTER_LOOP:
 	MOV DX, CX
-	MOV CX, 39DDH ; counter for inner loop
+	MOV CX, 5BE7H ; counter for inner loop
 INNER_LOOP:
 	LOOP INNER_LOOP
 	MOV CX, DX
