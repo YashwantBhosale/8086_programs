@@ -4,7 +4,7 @@
 ; at Port Fine tune the delay between flashing and running lights to  0.5 seconds
 
 MAIN:
-	MOV AL, 09H ; configure port A and B as output ports and port C as input port
+	MOV AL, 19H ; configure port A and B as output ports and port C as input port
 	OUT 33H, AL
 
 CHECK:
@@ -16,7 +16,7 @@ CHECK:
 	TEST AL, 01H ; check if LSB is set
 	JNZ LEFT_TO_RIGHT
 	
-	JMP BACK ; unconditionally keep checking
+	JMP CHECK ; unconditionally keep checking
 
 RIGHT_TO_LEFT:	
 	MOV AL, 01H ; start from 1st LED	
