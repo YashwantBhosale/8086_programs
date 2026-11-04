@@ -1,0 +1,48 @@
+; reverse a string 
+
+.MODEL SMALL
+.DATA    
+
+S DB 'COEPCS$'
+REV DB 15 DUP('?') 
+
+.CODE    
+MOV AX, @DATA
+MOV DS, AX 
+MOV ES, AX
+
+LEA DI, S ; SCASB USES ES:DI
+MOV AL, '$'  
+MOV CX, 0
+CLD 
+
+
+NEXT: SCASB ; COMPARES DI WITH AL & DI=DI+1
+      JE HERE ;DONE, LEN FOUND
+      INC CX
+      JMP NEXT
+     
+
+HERE:MOV BX, CX  ; BX = STRLEN
+     DEC BX
+          
+     LEA SI, S
+     ADD SI, BX ; SI = LAST CHAR
+     LEA DI, REV
+     INC BX 
+     MOV CX, BX    
+     STD ; SET DIRN FLAG; DEC SI-1 & DI-1
+
+LBL: LODSB ; AL = [SI], DEC SI
+     MOV [DI], AL
+     INC DI
+     LOOP LBL
+CLD
+MOV [DI], '$'             
+
+;PRINT THE REVERSED STRING
+
+LEA DX, REV
+MOV AH, 09H
+INT 21H
+HLT

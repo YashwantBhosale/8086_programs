@@ -1,0 +1,23 @@
+; fibonacci series of n terms
+
+MOV SI, 2000H
+MOV CL, 0AH
+
+MOV AL, 01H
+MOV [SI], AL
+INC SI
+
+MOV AL, 01H
+MOV [SI], AL
+INC SI
+
+SUB CL, 02; INITIALIZED WITH 2 TERMS
+
+NEXT:
+    MOV AL, [SI-1]
+    ADD AL, [SI-2]
+    MOV [SI], AL
+    INC SI
+    DEC CL
+    JNZ NEXT
+HLT

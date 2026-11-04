@@ -1,0 +1,37 @@
+; find the length of a string
+
+.MODEL SMALL
+.DATA    
+
+S DB 'COEP-CSE$'  
+LEN DB 'LENGTH IS: $'
+
+.CODE    
+MOV AX, @DATA
+MOV DS, AX
+
+LEA SI, S
+MOV CX, 0
+
+NEXT: MOV AL, [SI]
+      CMP AL, '$'
+      JE HERE ;DONE
+      INC CX
+      INC SI
+      JMP NEXT
+               
+;PRINT LENGTH
+
+HERE:   
+;PRINT STRING
+LEA DX, LEN
+MOV AH, 09H
+INT 21H
+
+;PRINT DIGIT 
+ADD CL, 30H ; CONVERT THE NO. TO ASCII
+MOV DL, CL
+MOV AH, 02H
+INT 21H
+
+HLT
